@@ -13,7 +13,7 @@ DEFAULT_CONFIG = {
             'local': os.path.join(home, '.ssh/id_rsa')
         },
         'ssh_public_key': {
-            'drive': 'Navega/NewPlatform/Config/ssh_public_key.pub',
+            'drive': 'Navega/NewPlatform/Config/ssh_private_key.pub',
             'local': os.path.join(home, '.ssh/id_rsa.pub')
         }
     },
