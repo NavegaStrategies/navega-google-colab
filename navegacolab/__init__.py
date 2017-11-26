@@ -21,7 +21,7 @@ DEFAULT_CONFIG = {
     },
 }
 
-def init_account(config=None) 
+def init_account(config=None):
     if config is None:
         config = DEFAULT_CONFIG
     local_path = config.get('paths').get('service_account').get('local')
