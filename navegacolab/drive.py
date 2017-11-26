@@ -20,9 +20,10 @@ class GDrive(object):
                 scred = GoogleCredentials.get_application_default()
             gauth.credentials = scred
         self.drive = GoogleDrive(gauth)
-        
-    def folder_to_id(self, dir_path):
-        path_comp = os.path.split(dir_path)
+ 
+    
+    def folder_to_id(self, path):
+        path_comp = os.path.split(path)
         parent_id = 'root'
         for comp in path_comp:
             q = "'{parent_id}' in parents and title='{comp}' and trashed=false".format(parent_id=parent_id, comp=comp)
@@ -33,6 +34,14 @@ class GDrive(object):
         else:
             raise AttributeError('No such folder')
         return parent_id
+    
+    def dir(self, path):
+        if path == '/'
+            q = "'root' in parents and trashed=false"
+        else:
+            fid = self.folder_id(path)
+            q = "'{folder_id}' in parents and trashed=false".format(folder_id=fid)
+        return self.drive.ListFile({'q': q}).GetList()
 
     def path_to_id(self, path):
         folder_name, file_name = os.path.dirname(path), os.path.basename(path)
