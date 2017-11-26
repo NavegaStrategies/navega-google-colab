@@ -10,10 +10,9 @@ from .drive import GDrive
 def init_account(config=None):
     if config is None:
         config = DEFAULT_CONFIG
-    local_path = config.get('paths').get('service_account').get('local')
-    if not os.path.exists(local_path):
+    if os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') is None:
         auth.authenticate_user()
-        drive = GDrive()
-        for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config']:
-            c = config.get('paths').get(name)
-            drive.download(c.get('drive'), c.get('local'))
+    drive = GDrive()
+    for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config']:
+        c = config.get('paths').get(name)
+        drive.download(c.get('drive'), c.get('local'))
