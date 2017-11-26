@@ -8,7 +8,7 @@ from .config import DEFAULT_CONFIG
 
 
 class GDrive(object):
-    def __init__(self, user_email, gauth=None, config=None):
+    def __init__(self, gauth=None, user_email=None, config=None):
         if config is None:
             config = DEFAULT_CONFIG
         if gauth is None:
@@ -24,7 +24,6 @@ class GDrive(object):
                 scred = GoogleCredentials.get_application_default()
             gauth.credentials = scred
         self.drive = GoogleDrive(gauth)
- 
     
     def folder_to_id(self, path):
         path_comp = path.split('/')
