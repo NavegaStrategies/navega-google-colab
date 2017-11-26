@@ -15,6 +15,10 @@ DEFAULT_CONFIG = {
         'ssh_public_key': {
             'drive': 'Navega/NewPlatform/Config/ssh_private_key.pub',
             'local': os.path.join(home, '.ssh/id_rsa.pub')
+        },
+        'ssh_config': {
+            'drive': 'Navega/NewPlatform/Config/ssh_config',
+            'local': os.path.join(home, '.ssh/config')
         }
     },
 }

@@ -14,6 +14,6 @@ def init_account(config=None):
     if not os.path.exists(local_path):
         auth.authenticate_user()
         drive = GDrive()
-        for name in ['service_account', 'ssh_private_key', 'ssh_public_key']:
+        for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config']:
             c = config.get('paths').get(name)
             drive.download(c.get('drive'), c.get('local'))
