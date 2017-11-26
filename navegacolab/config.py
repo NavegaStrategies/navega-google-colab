@@ -1,3 +1,7 @@
+import os
+
+home = os.environ['HOME']
+
 DEFAULT_CONFIG = {
     'paths': {
         'service_account': {
@@ -6,11 +10,11 @@ DEFAULT_CONFIG = {
         },
         'ssh_private_key': {
             'drive': 'Navega/NewPlatform/Config/ssh_private_key',
-            'local': '~/.ssh/id_rsa'
+            'local': os.path.join(home, '.ssh/id_rsa')
         },
         'ssh_public_key': {
             'drive': 'Navega/NewPlatform/Config/ssh_public_key.pub',
-            'local': '~/.ssh/id_rsa.pub'
+            'local': os.path.join(home, '.ssh/id_rsa.pub')
         }
     },
 }
