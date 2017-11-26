@@ -39,7 +39,7 @@ class GDrive(object):
         if path == '/':
             q = "'root' in parents and trashed=false"
         else:
-            fid = self.folder_id(path)
+            fid = self.folder_to_id(path)
             q = "'{folder_id}' in parents and trashed=false".format(folder_id=fid)
         return self.drive.ListFile({'q': q}).GetList()
 
