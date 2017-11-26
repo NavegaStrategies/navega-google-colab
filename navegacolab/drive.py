@@ -34,7 +34,7 @@ class GDrive(object):
             raise AttributeError('No such folder')
         return parent_id
 
-    def path_to_id(drive, path):
+    def path_to_id(self, path):
         folder_name, file_name = os.path.dirname(path), os.path.basename(path)
         folder_id = self.folder_to_id(folder_name)
   
