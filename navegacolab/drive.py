@@ -14,10 +14,11 @@ class GDrive(object):
         if gauth is None:
             gauth = GoogleAuth()
             scred = None
-            if service_account is not None:
+            service_account_local = config.get('paths').get('service_account').get('local')
+            if os.path.exists(service_account_local):
                 scopes = ['https://www.googleapis.com/auth/drive']
                 scred = ServiceAccountCredentials.from_json_keyfile_name(
-                            config.get('paths').get('service_account').get('local'),
+                            service_account_local,
                             scopes=scopes)
                 scred = scred.create_delegated(sub=user_email)
             else:
