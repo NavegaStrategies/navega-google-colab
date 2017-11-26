@@ -36,7 +36,7 @@ class GDrive(object):
         return parent_id
     
     def dir(self, path):
-        if path == '/'
+        if path == '/':
             q = "'root' in parents and trashed=false"
         else:
             fid = self.folder_id(path)
