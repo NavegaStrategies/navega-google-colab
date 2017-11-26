@@ -27,7 +27,7 @@ class GDrive(object):
         parent_id = 'root'
         for comp in path_comp:
             q = "'{parent_id}' in parents and title='{comp}' and trashed=false".format(parent_id=parent_id, comp=comp)
-        # print(parent_id, comp, q)
+            print(parent_id, comp, q)
             l = self.drive.ListFile({'q': q}).GetList()
             if l:
                 parent_id = l[0]['id']
