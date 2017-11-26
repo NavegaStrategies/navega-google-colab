@@ -4,7 +4,8 @@ from oauth2client.service_account import ServiceAccountCredentials
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
-from . import DEFAULT_CONFIG
+from .config import DEFAULT_CONFIG
+
 
 class GDrive(object):
     def __init__(self, user_email, gauth=None, config=None):
