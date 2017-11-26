@@ -23,7 +23,7 @@ class GDrive(object):
  
     
     def folder_to_id(self, path):
-        path_comp = os.path.split(path)
+        path_comp = path.split('/')
         parent_id = 'root'
         for comp in path_comp:
             q = "'{parent_id}' in parents and title='{comp}' and trashed=false".format(parent_id=parent_id, comp=comp)
