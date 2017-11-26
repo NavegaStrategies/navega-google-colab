@@ -4,18 +4,21 @@ from oauth2client.service_account import ServiceAccountCredentials
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
+from . import DEFAULT_CONFIG
 
 class GDrive(object):
-    def __init__(self, gauth=None, service_account=None):
+    def __init__(self, user_email, gauth=None, config=None):
+        if config is None:
+            config = DEFAULT_CONFIG
         if gauth is None:
             gauth = GoogleAuth()
             scred = None
             if service_account is not None:
                 scopes = ['https://www.googleapis.com/auth/drive']
                 scred = ServiceAccountCredentials.from_json_keyfile_name(
-                            service_account['path'],
+                            config.get('paths').get('service_account').get('local'),
                             scopes=scopes)
-                scred = scred.create_delegated(sub=service_account['user_email'])
+                scred = scred.create_delegated(sub=user_email)
             else:
                 scred = GoogleCredentials.get_application_default()
             gauth.credentials = scred
