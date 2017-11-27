@@ -1,3 +1,6 @@
+# -*- coding: utf-8 -*-
+from __future__ import print_function
+
 import os
 from oauth2client.client import GoogleCredentials 
 from oauth2client.service_account import ServiceAccountCredentials
