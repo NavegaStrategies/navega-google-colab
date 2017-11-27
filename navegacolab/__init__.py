@@ -23,7 +23,8 @@ def init(config=None, user_email=None):
         c = config.get('paths').get(name)
         drive.download(c.get('drive'), c.get('local'))
     os.chmod(config.get('paths').get('ssh_private_key').get('local'), 0600)
-    os.environ['GIT_SSH_COMMAND'] = 'ssh -F .ssh/config'
+    for n, v in config.get('envs').items():
+        os.environ[n] = v
     pkg_local = config.get('paths').get('packages').get('local')
     with open(pkg_local, 'r') as f:
         for name in f:

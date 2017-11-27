@@ -28,5 +28,10 @@ DEFAULT_CONFIG = {
             'local': 'packages.txt',
         }
     },
+    'envs': {
+        'GIT_SSH_COMMAND': 'ssh -F .ssh/config',
+        'TDWE_USER': 'DS:ZNBN003',
+        'TDWE_PASSWD': 'TIGER165',
+    },
 }
 
