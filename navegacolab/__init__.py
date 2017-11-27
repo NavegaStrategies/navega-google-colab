@@ -12,7 +12,7 @@ from .drive import GDrive
 def init(config=None, user_email=None):
     if config is None:
         config = DEFAULT_CONFIG
-    sc_local = config.get('paths').get('service_accouunt').get('local')
+    sc_local = config.get('paths').get('service_account').get('local')
     if not os.path.exists(sc_local) and os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') is None:
         auth.authenticate_user()
     drive = GDrive(user_email=user_email)
