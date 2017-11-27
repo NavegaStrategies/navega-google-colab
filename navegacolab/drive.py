@@ -16,17 +16,19 @@ class GDrive(object):
             config = DEFAULT_CONFIG
         if gauth is None:
             gauth = GoogleAuth()
-            scred = None
+            self.cred = None
             service_account_local = config.get('paths').get('service_account').get('local')
             if os.path.exists(service_account_local):
                 scopes = ['https://www.googleapis.com/auth/drive']
-                scred = ServiceAccountCredentials.from_json_keyfile_name(
+                self.cred = ServiceAccountCredentials.from_json_keyfile_name(
                             service_account_local,
                             scopes=scopes)
-                scred = scred.create_delegated(sub=user_email)
+                self.cred = self.cred.create_delegated(sub=user_email)
             else:
-                scred = GoogleCredentials.get_application_default()
-            gauth.credentials = scred
+                self.cred = GoogleCredentials.get_application_default()
+            gauth.credentials = self.cred
+        else:
+            self.cred = gauth.credentials
         self.drive = GoogleDrive(gauth)
     
     def folder_to_id(self, path):
