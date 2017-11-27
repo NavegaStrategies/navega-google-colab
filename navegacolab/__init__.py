@@ -1,4 +1,6 @@
 import os
+import shlex
+import subprocess
 from google.colab import auth
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
@@ -10,10 +12,19 @@ from .drive import GDrive
 def init(config=None, user_email=None):
     if config is None:
         config = DEFAULT_CONFIG
-    if os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') is None:
+    sc_local = config.get('paths').get('service_accouunt').get('local')
+    if not os.path.exists(sc_local) and os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') is None:
         auth.authenticate_user()
     drive = GDrive(user_email=user_email)
-    for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config']:
+    for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config', 'packages']:
         c = config.get('paths').get(name)
         drive.download(c.get('drive'), c.get('local'))
     os.chmod(config.get('paths').get('ssh_private_key').get('local'), 0600)
+    os.environ['GIT_SSH_COMMAND'] = 'ssh -F .ssh/config'
+    pkg_local = config.get('paths').get('packages').get('local')
+    with open(pg_local, 'r') as f:
+        for name in f:
+            cmd = 'pip install --upgrade --quiet {0}'.format(name)
+            args = shlex.split(cmd)
+            subprocess.check_call(args)
+

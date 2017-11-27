@@ -19,6 +19,10 @@ DEFAULT_CONFIG = {
         'ssh_config': {
             'drive': 'Navega/NewPlatform/Config/ssh_config',
             'local': os.path.join(home, '.ssh/config')
+        },
+        'packages': {
+            'drive': 'Navega/NewPlatform/Config/packages.txt',
+            'local': 'packages.txt',
         }
     },
 }
