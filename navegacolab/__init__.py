@@ -24,6 +24,7 @@ def init(config=None, user_email=None):
     pkg_local = config.get('paths').get('packages').get('local')
     with open(pg_local, 'r') as f:
         for name in f:
+            print('Install', name)
             cmd = 'pip install --upgrade --quiet {0}'.format(name)
             args = shlex.split(cmd)
             subprocess.check_call(args)
