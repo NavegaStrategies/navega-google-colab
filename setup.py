@@ -8,5 +8,6 @@ setup(name='navega-google-colab',
       url='http://navegastrategies.com',
       packages=['navegacolab', 
                ],
+      install_requires=['PyDrive'],
 )
 
