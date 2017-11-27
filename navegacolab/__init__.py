@@ -22,7 +22,7 @@ def init(config=None, user_email=None):
     os.chmod(config.get('paths').get('ssh_private_key').get('local'), 0600)
     os.environ['GIT_SSH_COMMAND'] = 'ssh -F .ssh/config'
     pkg_local = config.get('paths').get('packages').get('local')
-    with open(pg_local, 'r') as f:
+    with open(pkg_local, 'r') as f:
         for name in f:
             print('Install', name)
             cmd = 'pip install --upgrade --quiet {0}'.format(name)
