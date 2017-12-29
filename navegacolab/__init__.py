@@ -4,7 +4,6 @@ from __future__ import print_function
 import os
 import shlex
 import subprocess
-from google.colab import auth
 from pydrive.auth import GoogleAuth
 from pydrive.drive import GoogleDrive
 
@@ -13,6 +12,7 @@ from .drive import GDrive
 
 
 def init(config=None, user_email=None):
+    from google.colab import auth
     if config is None:
         config = DEFAULT_CONFIG
     sc_local = config.get('paths').get('service_account').get('local')
