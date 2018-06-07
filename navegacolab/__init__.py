@@ -30,7 +30,7 @@ def init(config=None, user_email=None):
         for name in f:
             name = name.strip()
             print('Install', name)
-            cmd = 'pip install --upgrade --quiet {0}'.format(name)
+            cmd = 'pip install --no-cache-dir --upgrade --quiet {0}'.format(name)
             args = shlex.split(cmd)
             subprocess.check_call(args)
 
