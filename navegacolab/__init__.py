@@ -1,6 +1,7 @@
 # -*- coding: utf-8 -*-
 from __future__ import print_function
 
+import sys
 import os
 import shlex
 import subprocess
@@ -30,7 +31,12 @@ def init(config=None, user_email=None, verbose=False):
         for name in f:
             name = name.strip()
             print('Install', name)
-            cmd = 'pip install --no-cache-dir --upgrade {1} {0}'.format(name, '--queit' if not verbose else '')
+            cmd = 'pip install --no-cache-dir --upgrade {1} {0}'.format(name, '--quiet' if not verbose else '')
             args = shlex.split(cmd)
-            subprocess.check_call(args)
+            try:
+                subprocess.check_call(args)
+            except subprocess.CalledProcessError as e:
+                print(e.cmd)
+                print(e.output)
+                raise
 
