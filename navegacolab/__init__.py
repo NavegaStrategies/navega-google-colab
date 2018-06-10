@@ -11,7 +11,7 @@ from .config import DEFAULT_CONFIG
 from .drive import GDrive
 
 
-def init(config=None, user_email=None):
+def init(config=None, user_email=None, verbose=False):
     from google.colab import auth
     if config is None:
         config = DEFAULT_CONFIG
@@ -30,7 +30,7 @@ def init(config=None, user_email=None):
         for name in f:
             name = name.strip()
             print('Install', name)
-            cmd = 'pip install --no-cache-dir --upgrade --quiet {0}'.format(name)
+            cmd = 'pip install --no-cache-dir --upgrade {1} {0}'.format(name, '--queit' if not verbose else '')
             args = shlex.split(cmd)
             subprocess.check_call(args)
 
