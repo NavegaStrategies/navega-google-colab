@@ -17,13 +17,17 @@ def init(config=None, user_email=None, verbose=False):
     if config is None:
         config = DEFAULT_CONFIG
     sc_local = config.get('paths').get('service_account').get('local')
-    if not os.path.exists(sc_local) and os.environ.get('GOOGLE_APPLICATION_CREDENTIALS') is None:
+    if not os.path.exists(sc_local) and os.environ.get(
+            'GOOGLE_APPLICATION_CREDENTIALS') is None:
         auth.authenticate_user()
     drive = GDrive(user_email=user_email)
-    for name in ['service_account', 'ssh_private_key', 'ssh_public_key', 'ssh_config', 'packages']:
+    for name in [
+            'service_account', 'ssh_private_key', 'ssh_public_key',
+            'ssh_config', 'packages'
+    ]:
         c = config.get('paths').get(name)
         drive.download(c.get('drive'), c.get('local'))
-    os.chmod(config.get('paths').get('ssh_private_key').get('local'), 0600)
+    os.chmod(config.get('paths').get('ssh_private_key').get('local'), 0o600)
     for n, v in config.get('envs').items():
         os.environ[n] = v
     pkg_local = config.get('paths').get('packages').get('local')
@@ -31,7 +35,8 @@ def init(config=None, user_email=None, verbose=False):
         for name in f:
             name = name.strip()
             print('Install', name)
-            cmd = 'pip install --no-cache-dir --upgrade {1} {0}'.format(name, '--quiet' if not verbose else '')
+            cmd = 'pip install --no-cache-dir --upgrade {1} {0}'.format(
+                name, '--quiet' if not verbose else '')
             args = shlex.split(cmd)
             try:
                 subprocess.check_call(args)
@@ -39,4 +44,3 @@ def init(config=None, user_email=None, verbose=False):
                 print(e.cmd)
                 print(e.output)
                 raise
-
