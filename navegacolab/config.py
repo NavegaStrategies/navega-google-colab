@@ -8,8 +8,10 @@ home = os.environ['HOME']
 DEFAULT_CONFIG = {
     'paths': {
         'service_account': {
-            'drive': 'Navega/NewPlatform/Config/platform-dev-service-account.json',
-            'local': 'service_account.json'
+            'drive':
+            'Navega/NewPlatform/Config/platform-dev-service-account.json',
+            'local':
+            'service_account.json'
         },
         'ssh_private_key': {
             'drive': 'Navega/NewPlatform/Config/ssh_private_key',
@@ -29,7 +31,6 @@ DEFAULT_CONFIG = {
         }
     },
     'envs': {
-        'GIT_SSH_COMMAND': 'ssh -F .ssh/config',
+        'GIT_SSH_COMMAND': 'ssh -F /root/.ssh/config',
     },
 }
-
